@@ -1,6 +1,7 @@
 package com.gfg.crash_course_spring.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,11 @@ public class Student {
     private long id;
 
     @Column(name = "first_name", nullable = false)
+    @NotBlank(message = "First name is mandatory")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
+    @NotBlank(message = "Last name is mandatory")
     private String lastName;
 
     public Student() {
@@ -51,4 +54,7 @@ public class Student {
                 '}';
     }
 
+    public long getId() {
+        return id;
+    }
 }

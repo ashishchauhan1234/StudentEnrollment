@@ -1,5 +1,6 @@
 package com.gfg.crash_course_spring.service;
 
+import com.gfg.crash_course_spring.exception.NotFoundExceptions;
 import com.gfg.crash_course_spring.model.Student;
 import com.gfg.crash_course_spring.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ public class StudentService {
 
     public Student getStudentById(long id) {
         Optional<Student> optionalStudent = studentRepository.findById(id);
-        return optionalStudent.orElse(null);
+        return optionalStudent.orElseThrow(() -> {
+                    return new NotFoundExceptions(" Student with ID : " + id + " was not available.");
+                }
+        );
     }
 
     public String deleteStudentById(long id) {
